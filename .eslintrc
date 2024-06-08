@@ -1,0 +1,263 @@
+{
+  "env": {
+    "browser": true,
+    "es6": true,
+    "node": true
+  },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 11,
+    "sourceType": "module",
+    "project": ["./tsconfig.json"],
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "ignorePatterns": [
+    "*.d.ts",
+    "*.js",
+    "*.json",
+    "*.jsx",
+    "/types",
+    "coverage",
+    "node_modules",
+    "ts_modules"
+  ],
+  "plugins": [
+    "no-relative-import-paths",
+    "prettier",
+    "react",
+    "simple-import-sort"
+  ],
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "next/core-web-vitals"
+  ],
+  "rules": {
+    //* eslint base */
+    //* eslint base - possible problems */
+
+    "array-callback-return": 2,
+    "no-constructor-return": 2,
+    "no-duplicate-imports": 2,
+    "no-promise-executor-return": 2,
+    "no-self-compare": 2,
+    "no-template-curly-in-string": 2,
+    "no-unmodified-loop-condition": 2,
+    "no-unreachable-loop": 2,
+    "no-use-before-define": 2,
+    "require-atomic-updates": 2,
+
+    //* eslint base - suggestions */
+
+    "block-scoped-var": 2,
+    "camelcase": 2,
+    "capitalized-comments": 0,
+    "class-methods-use-this": 0,
+    "complexity": 2,
+    "consistent-return": 2,
+    "consistent-this": [2, "_this"],
+    "default-case-last": 2,
+    "dot-notation": 2,
+    "eqeqeq": [
+      2,
+      "always",
+      {
+        "null": "ignore"
+      }
+    ],
+    "func-style": [2, "expression"],
+    "grouped-accessor-pairs": [2, "getBeforeSet"],
+    "max-classes-per-file": [2, 1],
+    "max-depth": [2, 4],
+    "max-nested-callbacks": [2, 4],
+    "max-params": [2, 5],
+    "new-cap": 2,
+    "no-alert": 2,
+    "no-bitwise": 2,
+    "no-caller": 2,
+    "no-console": 2,
+    "no-continue": 2,
+    "no-delete-var": 0,
+    "no-div-regex": 2,
+    "no-empty-function": 0,
+    "no-eq-null": 0,
+    "no-eval": 2,
+    "no-extend-native": 2,
+    "no-extra-bind": 2,
+    "no-extra-label": 2,
+    "no-floating-decimal": 2,
+    "no-implicit-coercion": 2,
+    "no-implicit-globals": 2,
+    "no-implied-eval": 2,
+    "no-invalid-this": 2,
+    "no-iterator": 2,
+    "no-label-var": 2,
+    "no-labels": 2,
+    "no-lone-blocks": 2,
+    "no-lonely-if": 2,
+    "no-loop-func": 2,
+    "no-multi-assign": 2,
+    "no-new-func": 2,
+    "no-new-object": 2,
+    "no-new-wrappers": 2,
+    "no-octal-escape": 2,
+    "no-param-reassign": 2,
+    "no-proto": 2,
+    "no-return-assign": 2,
+    "no-return-await": 2,
+    "no-script-url": 2,
+    "no-sequences": 2,
+    "no-shadow": 0,
+    "no-throw-literal": 2,
+    "no-undef-init": 2,
+    "no-unneeded-ternary": 2,
+    "no-unused-expressions": 2,
+    "no-useless-call": 2,
+    "no-useless-computed-key": 2,
+    "no-useless-concat": 2,
+    "no-useless-constructor": 2,
+    "no-useless-return": 2,
+    "no-void": 2,
+    "object-shorthand": [2, "always"],
+    "one-var": [2, "never"],
+    "one-var-declaration-per-line": [2, "always"],
+    "operator-assignment": [2, "always"],
+    "prefer-arrow-callback": 2,
+    "prefer-destructuring": 2,
+    "prefer-exponentiation-operator": 2,
+    "prefer-object-spread": 2,
+    "prefer-regex-literals": 2,
+    "prefer-template": 2,
+    "radix": 2,
+    "require-await": 2,
+    "require-unicode-regexp": 2,
+    "spaced-comment": [
+      2,
+      "always",
+      {
+        "markers": ["/"]
+      }
+    ],
+    "symbol-description": 2,
+    "vars-on-top": 2,
+    "yoda": [
+      2,
+      "never",
+      {
+        "onlyEquality": true
+      }
+    ],
+
+    //* eslint base - layout & formatting */
+
+    "linebreak-style": [2, "unix"],
+    "padding-line-between-statements": [
+      2,
+      {
+        "blankLine": "always",
+        "prev": ["import", "const", "let"],
+        "next": "*"
+      },
+      {
+        "blankLine": "always",
+        "prev": "*",
+        "next": ["break", "return", "export", "throw"]
+      },
+      {
+        "blankLine": "any",
+        "prev": "import",
+        "next": "import"
+      },
+      {
+        "blankLine": "any",
+        "prev": "export",
+        "next": "export"
+      },
+      {
+        "blankLine": "any",
+        "prev": ["const", "let"],
+        "next": ["const", "let"]
+      }
+    ],
+
+    //* plugin:react */
+    "react/button-has-type": 2,
+    "react/boolean-prop-naming": [2, {"rule": "^(is|has)[A-Z]([A-Za-z0-9]?)+"}],
+    "react/destructuring-assignment": [2, "always"],
+    "react/display-name": 0,
+    "react/function-component-definition": [
+      2,
+      {
+        "namedComponents": "arrow-function",
+        "unnamedComponents": "arrow-function"
+      }
+    ],
+    "react/hook-use-state": 2,
+    "react/no-this-in-sfc": 2,
+    "react/no-unstable-nested-components": 2,
+    "react/prefer-stateless-function": 2,
+    "react/self-closing-comp": [2, {"html": false}],
+    "react/jsx-boolean-value": [2, "never"],
+    "react/jsx-curly-brace-presence": [2, {"props": "never", "children": "never"}],
+    "react/jsx-fragments": [2, "syntax"],
+    "react/jsx-no-useless-fragment": [2, {"allowExpressions": true}],
+    "react/jsx-pascal-case": 2,
+    "react-hooks/exhaustive-deps": 0,
+
+    // plugin:@typescript-eslint */
+    "@typescript-eslint/array-type": 2,
+    "@typescript-eslint/no-unused-vars": 2,
+    "@typescript-eslint/consistent-indexed-object-style": [2, "index-signature"],
+    "@typescript-eslint/consistent-type-definitions": [2, "interface"],
+    "@typescript-eslint/method-signature-style": [2, "method"],
+    "@typescript-eslint/no-duplicate-enum-values": 2,
+    "@typescript-eslint/no-empty-function": 0,
+    "@typescript-eslint/no-explicit-any": 2,
+    "@typescript-eslint/no-non-null-asserted-nullish-coalescing": 2,
+    "@typescript-eslint/no-require-imports": 2,
+    "@typescript-eslint/no-shadow": 2,
+    "@typescript-eslint/no-unnecessary-boolean-literal-compare": 2,
+    "@typescript-eslint/no-unnecessary-condition": 2,
+    "@typescript-eslint/no-useless-empty-export": 2,
+    "@typescript-eslint/prefer-includes": 2,
+    "@typescript-eslint/prefer-nullish-coalescing": 2,
+    "@typescript-eslint/prefer-optional-chain": 2,
+    "@typescript-eslint/prefer-reduce-type-parameter": 2,
+    "@typescript-eslint/prefer-string-starts-ends-with": 2,
+
+    //* plugin:no-relative-import-paths */
+    "no-relative-import-paths/no-relative-import-paths": 2,
+
+    //* plugin:prettier */
+    "prettier/prettier": 2,
+
+    //* plugin:simple-import-sort */
+    "simple-import-sort/imports": [
+      2,
+      {
+        "groups": [
+          // Packages. `react` related packages come first.
+          ["^react", "^@?\\w"],
+          // Side effect imports.
+          ["^\\u0000"],
+          // Packages.
+          // Things that start with a letter (or digit or underscore), or `@` followed by a letter.
+          ["^@?\\w"],
+          // Absolute imports and other imports such as Vue-style `@/foo`.
+          // Anything not matched in another group.
+          ["^"],
+          // Relative imports.
+          // Anything that starts with a dot.
+          ["^\\."],
+          // Style imports.
+          ["^.+\\.s?css$"],
+          // images.
+          ["^.+\\.s?png$"]
+        ]
+      }
+    ]
+  }
+}

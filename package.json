@@ -1,10 +1,10 @@
 {
-  "name": "next-starter-template",
-  "version": "1.1.0",
-  "description": "A Next.js preconfigured starter template",
-  "homepage": "https://github.com/piotrkonowrocki/next-starter-template#readme",
+  "name": "smart-mirror",
+  "version": "3.0.0",
+  "description": "Smart Mirror",
+  "homepage": "https://github.com/piotrkonowrocki/smart-mirror-v3#readme",
   "bugs": {
-    "url": "https://github.com/piotrkonowrocki/next-starter-template/issues"
+    "url": "https://github.com/piotrkonowrocki/smart-mirror-v3/issues"
   },
   "license": "MIT",
   "author": {

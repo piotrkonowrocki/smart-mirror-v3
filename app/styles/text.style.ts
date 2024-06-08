@@ -4,18 +4,21 @@ import {CSSObject} from '@emotion/react'
 import {theme} from './theme'
 
 export const text: CSSObject = {
-  body: {
-    color: theme.color.text,
-    fontSize: theme.font.size.base,
-    fontFamily: theme.font.family.sansSerif,
-    lineHeight: theme.font.spacing.base,
+  html: {
+    fontSize: 1,
   },
-  a: {
-    color: theme.color.primary,
-    textDecoration: 'underline',
-    cursor: 'pointer',
-    '&:hover, &:active': {
-      textDecoration: 'none',
-    },
+  body: {
+    color: theme.color.foreground,
+    fontSize: theme.font.size.base,
+    fontFamily: theme.font.family.rubik,
+    lineHeight: theme.font.spacing.base,
+    backgroundColor: theme.color.background,
+  },
+  'h1, h2, h3, h4, h5, h6, p, ul, ol': {
+    margin: 0,
+  },
+  'ul, ol': {
+    listStyle: 'none',
+    margin: 0,
   },
 }

@@ -1,14 +1,20 @@
 import React from 'react'
 import {NextPage} from 'next'
+import Head from 'next/head'
 
-import MasterPage from '@/app/components/masterpages/masterpage'
-import {DemoContent} from '@/app/components/ui/demo'
+import {siteName} from '@/app/dictionaries/site.dictionary'
 
 const Home: NextPage = () => {
+  const title = `${siteName} v${process.env.NEXT_PUBLIC_APP_VERSION}`
+
   return (
-    <MasterPage>
-      <DemoContent />
-    </MasterPage>
+    <>
+      <Head>
+        <title>{title}</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      Content
+    </>
   )
 }
 

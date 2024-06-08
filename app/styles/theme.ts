@@ -1,4 +1,6 @@
+/* eslint-disable new-cap */
 import facepaint from 'facepaint'
+import {Lato, Nunito, Poppins, Roboto, Rubik} from 'next/font/google'
 
 /*
   Colors naming convetion:
@@ -28,24 +30,57 @@ import facepaint from 'facepaint'
 const colors = {
   black: '#000',
   white: '#fff',
-  redCamelot: '#893456',
 }
-const base = 16
+
+const fontFamily = '-apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji"'
+
+const lato = Lato({
+  weight: ['400', '700'],
+  style: ['normal', 'italic'],
+  subsets: ['latin', 'latin-ext'],
+  display: 'swap',
+})
+const nunito = Nunito({
+  weight: ['400', '700'],
+  style: ['normal', 'italic'],
+  subsets: ['latin', 'latin-ext'],
+  display: 'swap',
+})
+const poppins = Poppins({
+  weight: ['400', '700'],
+  style: ['normal', 'italic'],
+  subsets: ['latin', 'latin-ext'],
+  display: 'swap',
+})
+const roboto = Roboto({
+  weight: ['400', '700'],
+  style: ['normal', 'italic'],
+  subsets: ['latin', 'latin-ext'],
+  display: 'swap',
+})
+const rubik = Rubik({
+  weight: ['400', '700'],
+  style: ['normal', 'italic'],
+  subsets: ['latin', 'latin-ext'],
+  display: 'swap',
+})
 
 export const theme = {
-  breakpoints: [576, 768, 992, 1288],
+  breakpoints: [768],
   color: {
-    black: colors.black,
-    white: colors.white,
-    primary: colors.redCamelot,
-    text: colors.black,
+    background: colors.black,
+    foreground: colors.white,
   },
   font: {
     size: {
-      base,
+      base: '16rem',
     },
     family: {
-      sansSerif: '-apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji"',
+      lato: `${lato.style.fontFamily}, ${fontFamily}`,
+      nunito: `${nunito.style.fontFamily}, ${fontFamily}`,
+      poppins: `${poppins.style.fontFamily}, ${fontFamily}`,
+      roboto: `${roboto.style.fontFamily}, ${fontFamily}`,
+      rubik: `${rubik.style.fontFamily}, ${fontFamily}`,
     },
     spacing: {
       base: 1.4,

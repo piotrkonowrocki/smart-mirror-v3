@@ -20,6 +20,11 @@
   },
   "dependencies": {
     "@emotion/react": "11.11.3",
+    "@tabler/icons-react": "3.6.0",
+    "@tanstack/react-query": "^5.40.1",
+    "axios": "1.7.2",
+    "change-case": "5.4.4",
+    "dayjs": "1.11.11",
     "eslint-plugin-no-relative-import-paths": "1.5.3",
     "facepaint": "1.2.1",
     "hex-rgb": "5.0.0",

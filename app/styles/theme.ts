@@ -29,6 +29,7 @@ import {Lato, Nunito, Poppins, Roboto, Rubik} from 'next/font/google'
 
 const colors = {
   black: '#000',
+  grey: '#808080',
   white: '#fff',
 }
 
@@ -69,11 +70,21 @@ export const theme = {
   breakpoints: [768],
   color: {
     background: colors.black,
+    faded: colors.grey,
     foreground: colors.white,
+  },
+  spacing: {
+    xs: '4rem',
+    s: '8rem',
+    m: '12rem',
+    l: '16rem',
+    xl: '24rem',
   },
   font: {
     size: {
-      base: '16rem',
+      heading: '48rem',
+      base: '18rem',
+      sub: '14rem',
     },
     family: {
       lato: `${lato.style.fontFamily}, ${fontFamily}`,
@@ -83,7 +94,17 @@ export const theme = {
       rubik: `${rubik.style.fontFamily}, ${fontFamily}`,
     },
     spacing: {
-      base: 1.4,
+      base: 1.2,
+    },
+  },
+  icon: {
+    size: {
+      sub: '18rem',
+    },
+    composition: {
+      sub: {
+        marginTop: '-2rem',
+      },
     },
   },
 }

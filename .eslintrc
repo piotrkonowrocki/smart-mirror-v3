@@ -229,7 +229,7 @@
     "@typescript-eslint/prefer-string-starts-ends-with": 2,
 
     //* plugin:no-relative-import-paths */
-    "no-relative-import-paths/no-relative-import-paths": 2,
+    "no-relative-import-paths/no-relative-import-paths": [2, { "allowSameFolder": true }],
 
     //* plugin:prettier */
     "prettier/prettier": 2,

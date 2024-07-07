@@ -3,6 +3,7 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./*"],
+      "@settings": ["app/settings.ts"],
       "@widgets": ["app/widgets/index.ts"]
     },
     "target": "es5",

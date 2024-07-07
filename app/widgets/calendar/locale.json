@@ -1,0 +1,24 @@
+{
+  "en": {
+    "today": "Today",
+    "tomorrow": "Tomorrow",
+    "upcoming": "Upcoming",
+    "no-events": "No events",
+    "at": "at",
+    "day": "day",
+    "days": "days",
+    "out-of": "out of",
+    "for": "for"
+  },
+  "pl": {
+    "today": "Dzisiaj",
+    "tomorrow": "Jutro",
+    "upcoming": "Nadchodzące",
+    "no-events": "Brak wydarzeń",
+    "at": "o",
+    "day": "dzień",
+    "days": "dni",
+    "out-of": "z",
+    "for": "przez"
+  }
+}

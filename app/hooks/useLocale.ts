@@ -7,7 +7,7 @@ const getNestedValue = (locale: INestedRecord<string>, path: string): string => 
 
   if (i) return getNestedValue(locale[k] as INestedRecord<string>, [i, ...rest].join('.'))
   else if (locale[k]) return locale[k] as string
-  else throw new Error('asd')
+  else throw new Error(`Unable to reach nested translation of key: "${k}"`)
 }
 
 export const useLocale = (locale: INestedRecord<string>, lang: string) => {

@@ -223,7 +223,7 @@
     "@typescript-eslint/no-unnecessary-condition": 2,
     "@typescript-eslint/no-useless-empty-export": 2,
     "@typescript-eslint/prefer-includes": 2,
-    "@typescript-eslint/prefer-nullish-coalescing": 2,
+    "@typescript-eslint/prefer-nullish-coalescing": [2, {"ignoreMixedLogicalExpressions": true}],
     "@typescript-eslint/prefer-optional-chain": 2,
     "@typescript-eslint/prefer-reduce-type-parameter": 2,
     "@typescript-eslint/prefer-string-starts-ends-with": 2,

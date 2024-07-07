@@ -1,21 +1,16 @@
 import {FC, Fragment} from 'react'
 import dayjs from 'dayjs'
-import isToday from 'dayjs/plugin/isToday'
-import isTomorrow from 'dayjs/plugin/isTomorrow'
 
-import {IWidgetCommonProps, Widget} from '@/app/components/widget'
+import {Widget} from '@/app/components/widget'
 import {useSettings} from '@/app/context'
 import {theme} from '@/app/styles'
-import {IWidgetClockResponse, TWidgetClockFormat} from '@/app/widgets/clock'
+import {IWidgetClockResponse, IWidgetClockSettings} from '@/app/widgets/clock'
 
-interface IWidgetClockProps extends IWidgetCommonProps {
-  format: TWidgetClockFormat
+interface IWidgetClockProps {
+  settings: IWidgetClockSettings
 }
 
-dayjs.extend(isToday)
-dayjs.extend(isTomorrow)
-
-export const WidgetClock: FC<IWidgetClockProps> = ({format}) => {
+export const WidgetClock: FC<IWidgetClockProps> = ({settings: {format}}) => {
   const {lang} = useSettings()
 
   return (

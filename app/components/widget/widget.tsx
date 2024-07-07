@@ -8,10 +8,14 @@ import axios from '@/app/utils/axios'
 interface IWidgetProps<T> {
   callback?(): unknown
   children(params: T): ReactNode
+  forceLoader?: boolean
   queryKey: (string | number)[]
   refresh?: number
   request?: {
     method?: 'get' | 'post'
+    headers?: {
+      [key: string]: string | number
+    }
     params?: {
       [key: string]: string | number
     }
@@ -21,7 +25,7 @@ interface IWidgetProps<T> {
   name: string
 }
 
-export const Widget = <T,>({callback, children, queryKey, refresh = 1000 * 60 * 30, request = [], name}: IWidgetProps<T>) => {
+export const Widget = <T,>({callback, children, forceLoader, queryKey, refresh = 1000 * 60 * 30, request = [], name}: IWidgetProps<T>) => {
   const [state, setState] = useState<TWidgetState>('loading')
 
   const {data, isSuccess} = useQuery({
@@ -29,8 +33,8 @@ export const Widget = <T,>({callback, children, queryKey, refresh = 1000 * 60 * 
     queryKey: ['widget', name, ...queryKey],
     queryFn: async () => {
       const response = await Promise.all(
-        request.map(async ({method = 'get', params = {}, url}) => {
-          const {data: partial} = await axios[method](url, {params})
+        request.map(async ({headers = {}, method = 'get', params = {}, url}) => {
+          const {data: partial} = method === 'get' ? await axios.get(url, {params, headers}) : await axios.post(url, params, {headers})
 
           return partial
         }),
@@ -62,7 +66,7 @@ export const Widget = <T,>({callback, children, queryKey, refresh = 1000 * 60 * 
         transition: 'opacity 200ms',
       }}
     >
-      {state !== 'rendered' && (
+      {(forceLoader || state !== 'rendered') && (
         <IconLoader2
           size="48rem"
           strokeWidth="2.5rem"
@@ -76,7 +80,7 @@ export const Widget = <T,>({callback, children, queryKey, refresh = 1000 * 60 * 
           }}
         />
       )}
-      {state === 'rendered' && children(data as T)}
+      {!forceLoader && state === 'rendered' && data && children(data)}
     </div>
   )
 }

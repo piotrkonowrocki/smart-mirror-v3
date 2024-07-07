@@ -1,5 +1,15 @@
 export type TWidgetForecastUnits = 'imperial' | 'metric'
 
+export interface IWidgetForecastCredentials {
+  appId: string
+}
+
+export interface IWidgetForecastSettings {
+  coords: [number, number]
+  days: number
+  units: TWidgetForecastUnits
+}
+
 export type IWidgetForecastResponse = [
   {
     base: 'string'

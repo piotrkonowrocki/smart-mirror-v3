@@ -4,6 +4,14 @@ const nextConfig = {
     forceSwcTransforms: true,
   },
   reactStrictMode: true,
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'flagcdn.com',
+      },
+    ],
+  },
 }
 
 module.exports = nextConfig

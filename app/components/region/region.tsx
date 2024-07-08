@@ -3,7 +3,7 @@ import {FC} from 'react'
 import {TWidgetRegionX, TWidgetRegionY} from '@/app/components/region/types'
 import {theme} from '@/app/styles'
 import {IWidget} from '@/app/types/settings'
-import {WidgetCalendar, WidgetClock, WidgetForecast} from '@/app/widgets'
+import {WidgetCalendar, WidgetClock, WidgetCurrency, WidgetForecast} from '@/app/widgets'
 
 interface IRegionProps {
   position: [TWidgetRegionX, TWidgetRegionY]
@@ -31,6 +31,8 @@ export const Region: FC<IRegionProps> = ({position: [x, y], widgets}) => {
               return <WidgetCalendar key={i} {...widget} />
             case 'clock':
               return <WidgetClock key={i} {...widget} />
+            case 'currency':
+              return <WidgetCurrency key={i} {...widget} />
             case 'forecast':
               return <WidgetForecast key={i} {...widget} />
             default:

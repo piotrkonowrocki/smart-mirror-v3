@@ -1,6 +1,7 @@
 import {ReactNode, useEffect, useState} from 'react'
 import {IconLoader2} from '@tabler/icons-react'
 import {useQuery} from '@tanstack/react-query'
+import {snakeCase} from 'change-case/keys'
 
 import {TWidgetState} from '@/app/components/widget'
 import axios from '@/app/utils/axios'
@@ -9,6 +10,7 @@ interface IWidgetProps<T> {
   callback?(): unknown
   children(params: T): ReactNode
   forceLoader?: boolean
+  name: string
   queryKey: (string | number)[]
   refresh?: number
   request?: {
@@ -22,10 +24,19 @@ interface IWidgetProps<T> {
     refresh?: number
     url: string
   }[]
-  name: string
+  transformToSnakeCase?: boolean
 }
 
-export const Widget = <T,>({callback, children, forceLoader, queryKey, refresh = 1000 * 60 * 30, request = [], name}: IWidgetProps<T>) => {
+export const Widget = <T,>({
+  callback,
+  children,
+  forceLoader,
+  name,
+  queryKey,
+  refresh = 1000 * 60 * 30,
+  request = [],
+  transformToSnakeCase = false,
+}: IWidgetProps<T>) => {
   const [state, setState] = useState<TWidgetState>('loading')
 
   const {data, isSuccess} = useQuery({
@@ -34,7 +45,9 @@ export const Widget = <T,>({callback, children, forceLoader, queryKey, refresh =
     queryFn: async () => {
       const response = await Promise.all(
         request.map(async ({headers = {}, method = 'get', params = {}, url}) => {
-          const {data: partial} = method === 'get' ? await axios.get(url, {params, headers}) : await axios.post(url, params, {headers})
+          const casedParams = transformToSnakeCase ? snakeCase(params) : params
+          const {data: partial} =
+            method === 'get' ? await axios.get(url, {params: casedParams, headers}) : await axios.post(url, casedParams, {headers})
 
           return partial
         }),

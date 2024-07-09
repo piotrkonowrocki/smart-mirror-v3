@@ -74,11 +74,13 @@ export const theme = {
     foreground: colors.white,
   },
   spacing: {
+    xxs: '2rem',
     xs: '4rem',
     s: '8rem',
     m: '12rem',
     l: '16rem',
     xl: '24rem',
+    xxl: '32rem',
   },
   font: {
     size: {

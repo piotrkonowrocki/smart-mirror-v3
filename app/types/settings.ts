@@ -1,6 +1,7 @@
 import {TWidgetRegionX, TWidgetRegionY} from '@/app/components/region'
 import {IWidgetCalendarCredentials, IWidgetCalendarSettings} from '@/app/widgets/calendar'
 import {IWidgetClockSettings} from '@/app/widgets/clock'
+import {IWidgetCryptoCredentials, IWidgetCryptoSettings} from '@/app/widgets/crypto'
 import {IWidgetCurrencyCredentials, IWidgetCurrencySettings} from '@/app/widgets/currency'
 import {IWidgetForecastCredentials, IWidgetForecastSettings} from '@/app/widgets/forecast'
 
@@ -17,6 +18,11 @@ interface IWidgetClock extends IWidgetCommons {
   name: 'clock'
   settings: IWidgetClockSettings
 }
+interface IWidgetCrypto extends IWidgetCommons {
+  name: 'crypto'
+  credentials: IWidgetCryptoCredentials
+  settings: IWidgetCryptoSettings
+}
 interface IWidgetCurrency extends IWidgetCommons {
   name: 'currency'
   credentials: IWidgetCurrencyCredentials
@@ -28,7 +34,7 @@ interface IWidgetForecast extends IWidgetCommons {
   settings: IWidgetForecastSettings
 }
 
-export type IWidget = IWidgetCalendar | IWidgetClock | IWidgetCurrency | IWidgetForecast
+export type IWidget = IWidgetCalendar | IWidgetClock | IWidgetCrypto | IWidgetCurrency | IWidgetForecast
 
 export interface ISettings {
   lang: string

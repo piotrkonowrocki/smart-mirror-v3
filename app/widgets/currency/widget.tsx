@@ -35,13 +35,13 @@ export const WidgetCurrency: FC<IWidgetCurrencyProps> = ({credentials: {apiKey},
         const [previous, current] = Object.values(response).slice(-2)
 
         return (
-          <ul css={{margin: 0, padding: 0, listStyle: 'none'}}>
+          <ul css={{display: 'flex', flexDirection: 'column', rowGap: theme.spacing.xxs, margin: 0, padding: 0, listStyle: 'none'}}>
             {Object.entries(current).map(([currency, value], i) => {
               const change = (previous[currency] / value) * 100 - 100
 
               return (
                 <li key={i} css={{display: 'flex', alignItems: 'center', columnGap: theme.spacing.xs}}>
-                  <div css={{position: 'relative', top: '-1rem', height: '14rem', width: '21rem', filter: 'grayscale(1) brightness(1.25)'}}>
+                  <div css={{position: 'relative', top: '-1rem', height: '16rem', width: '24rem', filter: 'grayscale(1)'}}>
                     <Image
                       src={`https://flagcdn.com/${currencies[i].slice(0, 2).toLowerCase()}.svg`}
                       alt={currencies[i]}

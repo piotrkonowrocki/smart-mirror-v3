@@ -10,6 +10,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'flagcdn.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'coin-images.coingecko.com',
+      },
     ],
   },
 }

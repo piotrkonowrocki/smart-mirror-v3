@@ -10,7 +10,6 @@ export const text: CSSObject = {
   body: {
     color: theme.color.foreground,
     fontSize: theme.font.size.base,
-    fontFamily: theme.font.family.rubik,
     lineHeight: theme.font.spacing.base,
     backgroundColor: theme.color.background,
   },

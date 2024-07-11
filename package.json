@@ -29,15 +29,21 @@
     "facepaint": "1.2.1",
     "hex-rgb": "5.0.0",
     "next": "14.0.4",
+    "node-schedule": "2.1.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "sanitize.css": "13.0.0"
+    "react-toastify": "10.0.5",
+    "sanitize.css": "13.0.0",
+    "sharp": "0.33.4",
+    "similarity": "1.2.1"
   },
   "devDependencies": {
     "@types/facepaint": "1.2.2",
     "@types/node": "20.10.6",
+    "@types/node-schedule": "2.1.7",
     "@types/react": "18.2.46",
     "@types/react-dom": "18.2.18",
+    "@types/similarity": "1.2.3",
     "@typescript-eslint/eslint-plugin": "6.17.0",
     "@typescript-eslint/parser": "6.17.0",
     "eslint": "8.56.0",

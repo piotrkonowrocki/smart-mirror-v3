@@ -1,5 +1,6 @@
-import {ReactNode, useEffect, useState} from 'react'
-import {IconLoader2} from '@tabler/icons-react'
+import {ReactNode, useEffect, useRef, useState} from 'react'
+import {Id, toast} from 'react-toastify'
+import {IconAlertTriangle, IconLoader2} from '@tabler/icons-react'
 import {useQuery} from '@tanstack/react-query'
 import {snakeCase} from 'change-case/keys'
 
@@ -27,7 +28,7 @@ interface IWidgetProps<T> {
   transformToSnakeCase?: boolean
 }
 
-export const Widget = <T,>({
+export const Widget = <T extends unknown[]>({
   callback,
   children,
   forceLoader,
@@ -37,9 +38,10 @@ export const Widget = <T,>({
   request = [],
   transformToSnakeCase = false,
 }: IWidgetProps<T>) => {
+  const toastId = useRef<Id>()
   const [state, setState] = useState<TWidgetState>('loading')
 
-  const {data, isSuccess} = useQuery({
+  const {data, error, isError, isSuccess} = useQuery({
     refetchInterval: refresh,
     queryKey: ['widget', name, ...queryKey],
     queryFn: async () => {
@@ -55,12 +57,31 @@ export const Widget = <T,>({
 
       return [...response, ...(callback ? [callback()] : [])] as T
     },
+    retry: 0,
   })
 
   useEffect(() => {
-    if (isSuccess && state === 'loading') {
-      setState('faded')
-      setTimeout(() => setState('rendered'), 400)
+    if (isError && !toastId.current) {
+      toastId.current = toast.warn(
+        <>
+          Error fetching data in <strong>{name}</strong> widget
+          <br />
+          {error.message}
+        </>,
+      )
+    }
+  }, [isError])
+
+  useEffect(() => {
+    if (isSuccess) {
+      if (toastId.current) {
+        toast.dismiss(toastId.current)
+        toastId.current = undefined
+      }
+      if (state === 'loading') {
+        setState('faded')
+        setTimeout(() => setState('rendered'), 400)
+      }
     }
   }, [isSuccess])
 
@@ -79,7 +100,7 @@ export const Widget = <T,>({
         transition: 'opacity 200ms',
       }}
     >
-      {(forceLoader || state !== 'rendered') && (
+      {(forceLoader || state !== 'rendered') && !isError && (
         <IconLoader2
           size="48rem"
           strokeWidth="2.5rem"
@@ -93,7 +114,8 @@ export const Widget = <T,>({
           }}
         />
       )}
-      {!forceLoader && state === 'rendered' && data && children(data)}
+
+      {isError ? <IconAlertTriangle /> : <>{!forceLoader && state === 'rendered' && data && children(data)}</>}
     </div>
   )
 }

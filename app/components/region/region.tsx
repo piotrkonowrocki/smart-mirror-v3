@@ -1,16 +1,17 @@
 import {FC} from 'react'
 
 import {TWidgetRegionX, TWidgetRegionY} from '@/app/components/region/types'
+import {useSettings} from '@/app/context'
 import {theme} from '@/app/styles'
-import {IWidget} from '@/app/types/settings'
 import {WidgetCalendar, WidgetClock, WidgetCrypto, WidgetCurrency, WidgetForecast} from '@/app/widgets'
 
 interface IRegionProps {
   position: [TWidgetRegionX, TWidgetRegionY]
-  widgets: IWidget[]
 }
 
-export const Region: FC<IRegionProps> = ({position: [x, y], widgets}) => {
+export const Region: FC<IRegionProps> = ({position: [x, y]}) => {
+  const {widgets} = useSettings()
+
   return (
     <div
       className={`region-${x} region-${y}`}

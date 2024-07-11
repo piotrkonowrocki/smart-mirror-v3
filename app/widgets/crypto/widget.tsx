@@ -16,7 +16,7 @@ interface IWidgetCryptoProps {
 export const WidgetCrypto: FC<IWidgetCryptoProps> = ({credentials: {apiKey}, settings: {baseCurrency, tokenIds}}) => {
   return (
     <Widget<IWidgetCryptoResponse>
-      name="forecast"
+      name="crypto"
       queryKey={[baseCurrency, ...tokenIds]}
       request={[
         {

@@ -15,7 +15,7 @@ export const WidgetClock: FC<IWidgetClockProps> = ({settings: {format}}) => {
 
   return (
     <Widget<IWidgetClockResponse>
-      name="forecast"
+      name="clock"
       callback={() => ({timestamp: new Date().getTime()})}
       queryKey={[new Date().getTime()]}
       refresh={1000}

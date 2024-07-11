@@ -15,7 +15,7 @@ interface IWidgetCurrencyProps {
 export const WidgetCurrency: FC<IWidgetCurrencyProps> = ({credentials: {apiKey}, settings: {baseCurrency, currencies}}) => {
   return (
     <Widget<IWidgetCurrencyResponse>
-      name="forecast"
+      name="currency"
       queryKey={[baseCurrency, ...currencies]}
       request={[
         {
@@ -39,7 +39,7 @@ export const WidgetCurrency: FC<IWidgetCurrencyProps> = ({credentials: {apiKey},
             {Object.entries(current).map(([currency, value], i) => {
               const change = (previous[currency] / value) * 100 - 100
 
-              return (
+              return value ? (
                 <li key={i} css={{display: 'flex', alignItems: 'center', columnGap: theme.spacing.xs}}>
                   <div css={{position: 'relative', top: '-1rem', height: '16rem', width: '24rem', filter: 'grayscale(1)'}}>
                     <Image
@@ -61,7 +61,7 @@ export const WidgetCurrency: FC<IWidgetCurrencyProps> = ({credentials: {apiKey},
                     )}
                   </div>
                 </li>
-              )
+              ) : null
             })}
           </ul>
         )

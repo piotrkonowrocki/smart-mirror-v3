@@ -1,4 +1,5 @@
 import {TWidgetRegionX, TWidgetRegionY} from '@/app/components/region'
+import {theme} from '@/app/styles'
 import {IWidgetCalendarCredentials, IWidgetCalendarSettings} from '@/app/widgets/calendar'
 import {IWidgetClockSettings} from '@/app/widgets/clock'
 import {IWidgetCryptoCredentials, IWidgetCryptoSettings} from '@/app/widgets/crypto'
@@ -34,9 +35,12 @@ interface IWidgetForecast extends IWidgetCommons {
   settings: IWidgetForecastSettings
 }
 
-export type IWidget = IWidgetCalendar | IWidgetClock | IWidgetCrypto | IWidgetCurrency | IWidgetForecast
+export type TWidget = IWidgetCalendar | IWidgetClock | IWidgetCrypto | IWidgetCurrency | IWidgetForecast
+export type TFontFamily = keyof typeof theme.font.family
 
 export interface ISettings {
+  font: TFontFamily
   lang: string
-  widgets: IWidget[]
+  scale: number
+  widgets: TWidget[]
 }

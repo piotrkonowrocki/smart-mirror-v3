@@ -99,6 +99,11 @@ export const theme = {
       base: 1.2,
     },
   },
+  radii: {
+    s: '2rem',
+    m: '4rem',
+    l: '8rem',
+  },
   icon: {
     size: {
       sub: '18rem',

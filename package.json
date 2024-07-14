@@ -33,6 +33,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-toastify": "10.0.5",
+    "rss-parser": "3.13.0",
     "sanitize.css": "13.0.0",
     "sharp": "0.33.4",
     "similarity": "1.2.1"

@@ -3,7 +3,7 @@ import {FC} from 'react'
 import {TWidgetRegionX, TWidgetRegionY} from '@/app/components/region/types'
 import {useSettings} from '@/app/context'
 import {theme} from '@/app/styles'
-import {WidgetCalendar, WidgetClock, WidgetCrypto, WidgetCurrency, WidgetForecast} from '@/app/widgets'
+import {WidgetCalendar, WidgetClock, WidgetCrypto, WidgetCurrency, WidgetForecast, WidgetRssFeed} from '@/app/widgets'
 
 interface IRegionProps {
   position: [TWidgetRegionX, TWidgetRegionY]
@@ -38,6 +38,8 @@ export const Region: FC<IRegionProps> = ({position: [x, y]}) => {
               return <WidgetCurrency key={i} {...widget} />
             case 'forecast':
               return <WidgetForecast key={i} {...widget} />
+            case 'rss-feed':
+              return <WidgetRssFeed key={i} {...widget} />
             default:
               return 'Unsupported widget type'
           }

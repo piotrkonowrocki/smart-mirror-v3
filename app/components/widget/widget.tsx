@@ -3,29 +3,61 @@ import {Id, toast} from 'react-toastify'
 import {IconAlertTriangle, IconLoader2} from '@tabler/icons-react'
 import {useQuery} from '@tanstack/react-query'
 import {snakeCase} from 'change-case/keys'
+import Parser from 'rss-parser'
 
 import {TWidgetState} from '@/app/components/widget'
+import {TWidget} from '@/app/types/settings'
 import axios from '@/app/utils/axios'
+
+interface IRequest {
+  method?: 'get' | 'post' | 'rss'
+  headers?: {
+    [key: string]: string | number
+  }
+  params?: {
+    [key: string]: string | number
+  }
+  refresh?: number
+  url: string
+}
 
 interface IWidgetProps<T> {
   callback?(): unknown
   children(params: T): ReactNode
   forceLoader?: boolean
-  name: string
+  name: TWidget['name']
   queryKey: (string | number)[]
   refresh?: number
-  request?: {
-    method?: 'get' | 'post'
-    headers?: {
-      [key: string]: string | number
-    }
-    params?: {
-      [key: string]: string | number
-    }
-    refresh?: number
-    url: string
-  }[]
+  request?: IRequest[]
   transformToSnakeCase?: boolean
+}
+
+const parser = new Parser()
+
+const getRequestData = async ({headers = {}, method = 'get', params = {}, url}: IRequest, transformToSnakeCase: boolean = false) => {
+  const casedParams = transformToSnakeCase ? snakeCase(params) : params
+
+  switch (method) {
+    case 'get': {
+      const {data} = await axios.get(url, {params: casedParams, headers})
+
+      return data
+    }
+    case 'post': {
+      const {data} = await axios.post(url, casedParams, {headers})
+
+      return data
+    }
+    case 'rss': {
+      const data = await parser.parseURL(url)
+
+      console.log(data)
+
+      return 'rss'
+    }
+    default:
+      throw new Error('Unreachable case')
+  }
 }
 
 export const Widget = <T extends unknown[]>({
@@ -46,10 +78,8 @@ export const Widget = <T extends unknown[]>({
     queryKey: ['widget', name, ...queryKey],
     queryFn: async () => {
       const response = await Promise.all(
-        request.map(async ({headers = {}, method = 'get', params = {}, url}) => {
-          const casedParams = transformToSnakeCase ? snakeCase(params) : params
-          const {data: partial} =
-            method === 'get' ? await axios.get(url, {params: casedParams, headers}) : await axios.post(url, casedParams, {headers})
+        request.map(async (params) => {
+          const partial = await getRequestData(params, transformToSnakeCase)
 
           return partial
         }),

@@ -5,6 +5,7 @@ import {IWidgetClockSettings} from '@/app/widgets/clock'
 import {IWidgetCryptoCredentials, IWidgetCryptoSettings} from '@/app/widgets/crypto'
 import {IWidgetCurrencyCredentials, IWidgetCurrencySettings} from '@/app/widgets/currency'
 import {IWidgetForecastCredentials, IWidgetForecastSettings} from '@/app/widgets/forecast'
+import {IWidgetRssFeedSettings} from '@/app/widgets/rss-feed'
 
 interface IWidgetCommons {
   region: [TWidgetRegionX, TWidgetRegionY]
@@ -34,8 +35,12 @@ interface IWidgetForecast extends IWidgetCommons {
   credentials: IWidgetForecastCredentials
   settings: IWidgetForecastSettings
 }
+interface IWidgetRssFeed extends IWidgetCommons {
+  name: 'rss-feed'
+  settings: IWidgetRssFeedSettings
+}
 
-export type TWidget = IWidgetCalendar | IWidgetClock | IWidgetCrypto | IWidgetCurrency | IWidgetForecast
+export type TWidget = IWidgetCalendar | IWidgetClock | IWidgetCrypto | IWidgetCurrency | IWidgetForecast | IWidgetRssFeed
 export type TFontFamily = keyof typeof theme.font.family
 
 export interface ISettings {

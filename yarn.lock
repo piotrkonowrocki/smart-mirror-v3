@@ -3265,6 +3265,11 @@ uri-js@^4.2.2:
   dependencies:
     punycode "^2.1.0"
 
+use-interval@1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/use-interval/-/use-interval-1.4.0.tgz#d0d24a359664373c0ed3f64768c99022a59cfce3"
+  integrity sha512-1betIJun2rXKLxa30AFOBZCeZhsBJoJ/3+gkCeYbJ63lAR//EnAb1NjNeFqzgqeM7zQfR76rrCUaA8DvfgoOpA==
+
 watchpack@2.4.0:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/watchpack/-/watchpack-2.4.0.tgz#fa33032374962c78113f93c7f2fb4c54c9862a5d"

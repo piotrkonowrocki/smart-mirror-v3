@@ -1,18 +1,10 @@
-/* eslint-disable camelcase */
 import {FC} from 'react'
-import {IconArrowDownRight, IconArrowUpRight} from '@tabler/icons-react'
-import Image from 'next/image'
 
 import {Widget} from '@/app/components/widget'
-import {theme} from '@/app/styles'
-import {rgba} from '@/app/utils'
-import {IWidgetRssFeedResponse, IWidgetRssFeedSettings} from '@/app/widgets/rss-feed'
+import {TWidgetInterface} from '@/app/types/settings'
+import {Carousel, IWidgetRssFeedResponse, IWidgetRssFeedSettings} from '@/app/widgets/rss-feed'
 
-interface IWidgetRssFeedProps {
-  settings: IWidgetRssFeedSettings
-}
-
-export const WidgetRssFeed: FC<IWidgetRssFeedProps> = ({settings: {feeds}}) => {
+export const WidgetRssFeed: FC<TWidgetInterface<IWidgetRssFeedSettings>> = ({settings: {feeds, maxItems}}) => {
   return (
     <Widget<IWidgetRssFeedResponse>
       name="rss-feed"
@@ -23,10 +15,13 @@ export const WidgetRssFeed: FC<IWidgetRssFeedProps> = ({settings: {feeds}}) => {
       }))}
       transformToSnakeCase
     >
-      {([tokens]) => {
-        return (
-          <>asd</>
-        )
+      {(list) => {
+        const items = list
+          .flatMap((item) => item.items)
+          .sort((a, b) => new Date(b.isoDate).getTime() - new Date(a.isoDate).getTime())
+          .slice(0, maxItems)
+
+        return <Carousel items={items} />
       }}
     </Widget>
   )

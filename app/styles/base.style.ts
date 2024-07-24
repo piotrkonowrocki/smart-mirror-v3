@@ -9,7 +9,6 @@ export const base: CSSObject = {
   },
   body: {
     overflow: 'hidden',
-    cursor: 'none',
   },
   '#__next': {
     height: '100%',

@@ -7,43 +7,44 @@ import {IWidgetCurrencyCredentials, IWidgetCurrencySettings} from '@/app/widgets
 import {IWidgetForecastCredentials, IWidgetForecastSettings} from '@/app/widgets/forecast'
 import {IWidgetRssFeedSettings} from '@/app/widgets/rss-feed'
 
-interface IWidgetCommons {
+export type TWidgetInterface<S, C = never> = {
+  settings: S
+} & ([C] extends [never]
+  ? {
+      credentials?: never
+    }
+  : {
+      credentials: C
+    })
+
+type TWidgetCommons<S, C = never> = TWidgetInterface<S, C> & {
   region: [TWidgetRegionX, TWidgetRegionY]
 }
 
-interface IWidgetCalendar extends IWidgetCommons {
+interface IWidgetCalendar extends TWidgetCommons<IWidgetCalendarSettings, IWidgetCalendarCredentials> {
   name: 'calendar'
-  credentials: IWidgetCalendarCredentials
-  settings: IWidgetCalendarSettings
 }
-interface IWidgetClock extends IWidgetCommons {
+interface IWidgetClock extends TWidgetCommons<IWidgetClockSettings> {
   name: 'clock'
-  settings: IWidgetClockSettings
 }
-interface IWidgetCrypto extends IWidgetCommons {
+interface IWidgetCrypto extends TWidgetCommons<IWidgetCryptoSettings, IWidgetCryptoCredentials> {
   name: 'crypto'
-  credentials: IWidgetCryptoCredentials
-  settings: IWidgetCryptoSettings
 }
-interface IWidgetCurrency extends IWidgetCommons {
+interface IWidgetCurrency extends TWidgetCommons<IWidgetCurrencySettings, IWidgetCurrencyCredentials> {
   name: 'currency'
-  credentials: IWidgetCurrencyCredentials
-  settings: IWidgetCurrencySettings
 }
-interface IWidgetForecast extends IWidgetCommons {
+interface IWidgetForecast extends TWidgetCommons<IWidgetForecastSettings, IWidgetForecastCredentials> {
   name: 'forecast'
-  credentials: IWidgetForecastCredentials
-  settings: IWidgetForecastSettings
 }
-interface IWidgetRssFeed extends IWidgetCommons {
+interface IWidgetRssFeed extends TWidgetCommons<IWidgetRssFeedSettings> {
   name: 'rss-feed'
-  settings: IWidgetRssFeedSettings
 }
 
 export type TWidget = IWidgetCalendar | IWidgetClock | IWidgetCrypto | IWidgetCurrency | IWidgetForecast | IWidgetRssFeed
 export type TFontFamily = keyof typeof theme.font.family
 
 export interface ISettings {
+  debug?: boolean
   font: TFontFamily
   lang: string
   scale: number

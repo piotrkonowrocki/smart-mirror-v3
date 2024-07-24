@@ -14,6 +14,7 @@ import {ISettings} from '@/app/types/settings'
 type ISettingsContextProps = ISettings
 
 const defaults: ISettingsContextProps = {
+  debug: false,
   font: 'rubik',
   lang: 'en',
   scale: 1,

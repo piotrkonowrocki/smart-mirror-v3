@@ -3,7 +3,6 @@ import {Id, toast} from 'react-toastify'
 import {IconAlertTriangle, IconLoader2} from '@tabler/icons-react'
 import {useQuery} from '@tanstack/react-query'
 import {snakeCase} from 'change-case/keys'
-import Parser from 'rss-parser'
 
 import {TWidgetState} from '@/app/components/widget'
 import {TWidget} from '@/app/types/settings'
@@ -32,8 +31,6 @@ interface IWidgetProps<T> {
   transformToSnakeCase?: boolean
 }
 
-const parser = new Parser()
-
 const getRequestData = async ({headers = {}, method = 'get', params = {}, url}: IRequest, transformToSnakeCase: boolean = false) => {
   const casedParams = transformToSnakeCase ? snakeCase(params) : params
 
@@ -49,11 +46,9 @@ const getRequestData = async ({headers = {}, method = 'get', params = {}, url}: 
       return data
     }
     case 'rss': {
-      const data = await parser.parseURL(url)
+      const {data} = await axios.get('/api/rss', {params: {url}})
 
-      console.log(data)
-
-      return 'rss'
+      return data
     }
     default:
       throw new Error('Unreachable case')

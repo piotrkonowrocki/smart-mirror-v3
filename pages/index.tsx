@@ -13,7 +13,7 @@ import {theme} from '@/app/styles'
 
 const Home: NextPage = () => {
   const queryClient = useQueryClient()
-  const {font, scale} = useSettings()
+  const {debug, font, scale} = useSettings()
   const title = `${siteName} v${process.env.NEXT_PUBLIC_APP_VERSION}`
 
   useEffect(() => {
@@ -26,7 +26,7 @@ const Home: NextPage = () => {
         <title>{title}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Global styles={{html: {fontFamily: theme.font.family[font], fontSize: `${scale}px`}}} />
+      <Global styles={{html: {fontFamily: theme.font.family[font], fontSize: `${scale}px`, cursor: debug ? 'auto' : 'none'}}} />
       <Toast />
       <div css={{display: 'grid', gap: theme.spacing.xl, gridTemplateColumns: '1fr 1fr', height: '100%', padding: theme.spacing.xl}}>
         <Region position={['left', 'top']} />

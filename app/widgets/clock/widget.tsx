@@ -4,13 +4,10 @@ import dayjs from 'dayjs'
 import {Widget} from '@/app/components/widget'
 import {useSettings} from '@/app/context'
 import {theme} from '@/app/styles'
+import {TWidgetInterface} from '@/app/types/settings'
 import {IWidgetClockResponse, IWidgetClockSettings} from '@/app/widgets/clock'
 
-interface IWidgetClockProps {
-  settings: IWidgetClockSettings
-}
-
-export const WidgetClock: FC<IWidgetClockProps> = ({settings: {format}}) => {
+export const WidgetClock: FC<TWidgetInterface<IWidgetClockSettings>> = ({settings: {format}}) => {
   const {lang} = useSettings()
 
   return (

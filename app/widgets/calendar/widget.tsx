@@ -8,6 +8,7 @@ import {Widget} from '@/app/components/widget'
 import {useSettings} from '@/app/context'
 import {useLocale} from '@/app/hooks'
 import {theme} from '@/app/styles'
+import {TWidgetInterface} from '@/app/types/settings'
 import {removeOrphans} from '@/app/utils'
 import axios from '@/app/utils/axios'
 import {
@@ -21,12 +22,10 @@ import {
 
 import * as locale from './locale.json'
 
-interface IWidgetCalendarProps {
-  credentials: IWidgetCalendarCredentials
-  settings: IWidgetCalendarSettings
-}
-
-export const WidgetCalendar: FC<IWidgetCalendarProps> = ({credentials: {clientId, clientSecret}, settings: {calendars}}) => {
+export const WidgetCalendar: FC<TWidgetInterface<IWidgetCalendarSettings, IWidgetCalendarCredentials>> = ({
+  credentials: {clientId, clientSecret},
+  settings: {calendars},
+}) => {
   const {lang} = useSettings()
   const {t} = useLocale(locale, lang)
 

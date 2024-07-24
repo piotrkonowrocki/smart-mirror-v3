@@ -5,15 +5,14 @@ import Image from 'next/image'
 
 import {Widget} from '@/app/components/widget'
 import {theme} from '@/app/styles'
+import {TWidgetInterface} from '@/app/types/settings'
 import {rgba} from '@/app/utils'
 import {IWidgetCryptoCredentials, IWidgetCryptoResponse, IWidgetCryptoSettings} from '@/app/widgets/crypto'
 
-interface IWidgetCryptoProps {
-  credentials: IWidgetCryptoCredentials
-  settings: IWidgetCryptoSettings
-}
-
-export const WidgetCrypto: FC<IWidgetCryptoProps> = ({credentials: {apiKey}, settings: {baseCurrency, tokenIds}}) => {
+export const WidgetCrypto: FC<TWidgetInterface<IWidgetCryptoSettings, IWidgetCryptoCredentials>> = ({
+  credentials: {apiKey},
+  settings: {baseCurrency, tokenIds},
+}) => {
   return (
     <Widget<IWidgetCryptoResponse>
       name="crypto"

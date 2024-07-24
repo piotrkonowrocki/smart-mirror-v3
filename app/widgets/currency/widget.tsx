@@ -5,14 +5,13 @@ import Image from 'next/image'
 
 import {Widget} from '@/app/components/widget'
 import {theme} from '@/app/styles'
+import {TWidgetInterface} from '@/app/types/settings'
 import {IWidgetCurrencyCredentials, IWidgetCurrencyResponse, IWidgetCurrencySettings} from '@/app/widgets/currency'
 
-interface IWidgetCurrencyProps {
-  credentials: IWidgetCurrencyCredentials
-  settings: IWidgetCurrencySettings
-}
-
-export const WidgetCurrency: FC<IWidgetCurrencyProps> = ({credentials: {apiKey}, settings: {baseCurrency, currencies}}) => {
+export const WidgetCurrency: FC<TWidgetInterface<IWidgetCurrencySettings, IWidgetCurrencyCredentials>> = ({
+  credentials: {apiKey},
+  settings: {baseCurrency, currencies},
+}) => {
   return (
     <Widget<IWidgetCurrencyResponse>
       name="currency"

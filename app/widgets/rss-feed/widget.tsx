@@ -9,10 +9,7 @@ export const WidgetRssFeed: FC<TWidgetInterface<IWidgetRssFeedSettings>> = ({set
     <Widget<IWidgetRssFeedResponse>
       name="rss-feed"
       queryKey={feeds}
-      request={feeds.map((feed) => ({
-        url: feed,
-        method: 'rss',
-      }))}
+      request={feeds.map((feed) => ({url: feed, method: 'rss'}))}
       transformToSnakeCase
     >
       {(list) => {

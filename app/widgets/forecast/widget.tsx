@@ -6,6 +6,7 @@ import {Widget} from '@/app/components/widget'
 import {useSettings} from '@/app/context'
 import {useLocale} from '@/app/hooks'
 import {theme} from '@/app/styles'
+import {TWidgetInterface} from '@/app/types/settings'
 import {
   getChartCoords,
   getFormattedTemperature,
@@ -18,18 +19,13 @@ import {
 
 import * as locale from './locale.json'
 
-interface IWidgetForecastProps {
-  credentials: IWidgetForecastCredentials
-  settings: IWidgetForecastSettings
-}
-
 const chartTemperatureToRemRatio = 3
 const chartCanvasWidth = 320
 const chartPointRadius = 3
 const chartStrokeWidth = 2
 const chartInternalOffset = chartPointRadius + chartStrokeWidth / 2
 
-export const WidgetForecast: FC<IWidgetForecastProps> = ({
+export const WidgetForecast: FC<TWidgetInterface<IWidgetForecastSettings, IWidgetForecastCredentials>> = ({
   credentials: {appId},
   settings: {
     coords: [lat, lon],

@@ -113,6 +113,7 @@ export const Widget = <T extends unknown[]>({
   return (
     <div
       css={{
+        position: 'relative',
         display: 'inline-flex',
         flexDirection: 'column',
         '.region-left &': {

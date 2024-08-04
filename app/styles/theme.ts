@@ -87,6 +87,7 @@ export const theme = {
       heading: '48rem',
       base: '18rem',
       sub: '14rem',
+      small: '12rem',
     },
     family: {
       lato: `${lato.style.fontFamily}, ${fontFamily}`,

@@ -69,7 +69,16 @@ export const Carousel: FC<ICarouselProps> = ({items}) => {
 
   return (
     <>
-      <ul css={{margin: 0, padding: 0, listStyle: 'none', opacity: isHidden ? 0 : 1, transition: `${counterAnimationTime}ms opacity`}}>
+      <ul
+        css={{
+          margin: 0,
+          padding: 0,
+          listStyle: 'none',
+          textAlign: 'left',
+          opacity: isHidden ? 0 : 1,
+          transition: `${counterAnimationTime}ms opacity`,
+        }}
+      >
         {cachedItems.map(({contentSnippet, title}, i) => (
           <li key={i} css={{display: step === i ? 'block' : 'none'}}>
             <p>{title}</p>

@@ -1,34 +1,31 @@
 interface IGetChartCoordsParams {
-  absoluteTemperature: number
   chartCanvasWidth: number
   chartInternalOffset: number
-  chartTemperatureToRemRatio: number
-  currentTemperature: number
+  chartPercentToRemRatio: number
+  currentPop: number
   i: number
-  maxTemperature: number
-  nextTemperature?: number
+  maxPop: number
+  nextPop?: number
   size: number
 }
 
 export const getChartCoords = ({
-  absoluteTemperature,
   chartCanvasWidth,
   chartInternalOffset,
-  chartTemperatureToRemRatio,
-  currentTemperature,
+  chartPercentToRemRatio,
+  currentPop,
   i,
-  maxTemperature,
-  nextTemperature,
+  maxPop,
+  nextPop,
   size,
 }: IGetChartCoordsParams) => {
   const getX = (_i: number) => (chartCanvasWidth / (size - 1)) * _i + chartInternalOffset
-  const getY = (_currentTemperature: number) =>
-    (maxTemperature + absoluteTemperature - _currentTemperature - absoluteTemperature) * chartTemperatureToRemRatio + chartInternalOffset
+  const getY = (_currentTemperature: number) => (maxPop - _currentTemperature) * chartPercentToRemRatio + chartInternalOffset
 
   return {
     x1: getX(i),
-    x2: nextTemperature ? getX(i + 1) : 0,
-    y1: getY(currentTemperature),
-    y2: nextTemperature ? getY(nextTemperature) : 0,
+    x2: nextPop !== undefined ? getX(i + 1) : 0,
+    y1: getY(currentPop),
+    y2: nextPop !== undefined ? getY(nextPop) : 0,
   }
 }

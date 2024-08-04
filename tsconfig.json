@@ -6,7 +6,7 @@
       "@settings": ["app/settings.ts"],
       "@widgets": ["app/widgets/index.ts"]
     },
-    "target": "es5",
+    "target": "es2015",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,

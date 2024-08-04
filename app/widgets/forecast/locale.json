@@ -2,11 +2,53 @@
   "en": {
     "feels-like": "feels like",
     "today": "Today",
-    "tomorrow": "Tomorrow"
+    "tomorrow": "Tomorrow",
+    "current-alerts-with-providers": "Current {{providers}} weather alerts",
+    "current-alerts-wo-providers": "Current weather alerts",
+    "alerts": {
+      "air-quality": "High air pollution",
+      "avalanches": "Avalanches",
+      "coastal-event": "Coastal hazard",
+      "cyclone": "Cyclones",
+      "extreme-high-temperature": "Heatwave",
+      "extreme-low-temperature": "Cold wave",
+      "fire-warning": "Fire warning",
+      "flood": "Flod warning",
+      "fog": "Heavy fog",
+      "hail": "Hail",
+      "marine-event": "Marine hazard",
+      "rain": "Intensive rain",
+      "sand-dust": "Sandstorm",
+      "snow-ice": "Intensive snow",
+      "thunderstorm": "Thunderstorm",
+      "tornado": "Tornado",
+      "wind": "Wind gusts"
+    }
   },
   "pl": {
     "feels-like": "o.",
     "today": "dzisiaj",
-    "tomorrow": "Jutro"
+    "tomorrow": "Jutro",
+    "current-alerts-with-providers": "Aktualne ostrzeżenia pogodowe {{providers}}",
+    "current-alerts-wo-providers": "Aktualne ostrzeżenia pogodowe",
+    "alerts": {
+      "air-quality": "Wysokie zanieczyszczenie powietrza",
+      "avalanches": "Zagrożenie lawinowe",
+      "coastal-event": "Niebezpiecześtwo nabrzeżne",
+      "cyclone": "Zagrożenie cyklonem",
+      "extreme-high-temperature": "Upał",
+      "extreme-low-temperature": "Silny mróz",
+      "fire-warning": "Zagrożenie pożarowe",
+      "flood": "Zagrożenie powodziowe",
+      "fog": "Intensywna mgła",
+      "hail": "Burze z gradem",
+      "marine-event": "Niebezpieczeństwo na morzu",
+      "rain": "Intensywne opady deszczu",
+      "sand-dust": "Zagrożenie burzą piaskową",
+      "snow-ice": "Intensywne opady śniegu",
+      "thunderstorm": "Burze",
+      "tornado": "Zagrożenie tornadem",
+      "wind": "Silny wiatr"
+    }
   }
 }

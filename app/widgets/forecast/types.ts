@@ -10,77 +10,60 @@ export interface IWidgetForecastSettings {
   units: TWidgetForecastUnits
 }
 
+export interface IWidgetForecastAlert {
+  description: string
+  end: number
+  event: string
+  senderName: string
+  start: number
+  tags: string[]
+}
+
 export type IWidgetForecastResponse = [
   {
-    base: 'string'
-    clouds: {
-      all: number
-    }
-    cod: number
-    coord: {
-      lat: number
-      lon: number
-    }
-    dt: number
-    id: number
-    main: {
+    alerts?: IWidgetForecastAlert[]
+    current: {
+      clouds: number
+      dewPoint: number
+      dt: number
       feelsLike: number
       humidity: number
       pressure: number
-      tempMax: number
-      tempMin: number
-      temp: number
-    }
-    name: string
-    sys: {
-      country: string
-      id: number
       sunrise: number
       sunset: number
-      type: number
+      temp: number
+      uvi: number
+      visibility: number
+      weather: [
+        {
+          id: string
+          main: string
+          description: string
+          icon: string
+        },
+      ]
+      windDeg: number
+      windSpeed: number
     }
-    timezone: number
-    visibility: number
-    weather: {
-      description: string
-      icon: string
-      id: number
-      main: string
-    }[]
-    wind: {
-      deg: number
-      speed: number
-    }
-  },
-  {
-    cod: number
-    city: {
-      coord: {
-        lon: number
-        lat: number
-      }
-      country: string
-      id: number
-      name: string
-      population: number
-      timezone: number
-    }
-    cnt: number
-    list: {
+    daily: {
       clouds: number
-      deg: number
+      dewPoint: number
       dt: number
-      feels_like: {
+      feelsLike: {
         day: number
         eve: number
         morn: number
         night: number
       }
-      gust: number
       humidity: number
+      moonPhase: number
+      moonrise: number
+      moonset: number
       pop: number
       pressure: number
-      speed: number
+      rain?: number
+      snow?: number
+      summary: number
       sunrise: number
       sunset: number
       temp: {
@@ -91,13 +74,43 @@ export type IWidgetForecastResponse = [
         morn: number
         night: number
       }
-      weather: {
-        description: string
-        icon: string
-        id: number
-        main: string
-      }[]
+      uvi: number
+      weather: [
+        {
+          id: string
+          main: string
+          description: string
+          icon: string
+        },
+      ]
+      windSpeed: number
     }[]
-    message: number
+    hourly: {
+      clouds: number
+      dewPoint: number
+      dt: number
+      feelsLike: number
+      humidity: number
+      pop: number
+      pressure: number
+      temp: number
+      uvi: number
+      visibility: number
+      weather: [
+        {
+          id: string
+          main: string
+          description: string
+          icon: string
+        },
+      ]
+      windDeg: number
+      windGust?: number
+      windSpeed: number
+    }[]
+    lat: number
+    lon: number
+    timezone: string
+    timezoneOffset: string
   },
 ]

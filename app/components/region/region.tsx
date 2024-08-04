@@ -20,8 +20,9 @@ export const Region: FC<IRegionProps> = ({position: [x, y]}) => {
         flexDirection: 'column',
         alignSelf: y === 'top' ? 'start' : 'end',
         justifySelf: x === 'left' ? 'start' : 'end',
+        textAlign: x === 'left' ? 'left' : 'right',
         gap: theme.spacing.xl,
-        maxWidth: '360rem',
+        maxWidth: '380rem',
       }}
     >
       {widgets

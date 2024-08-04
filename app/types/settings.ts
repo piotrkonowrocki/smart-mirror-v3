@@ -1,5 +1,6 @@
 import {TWidgetRegionX, TWidgetRegionY} from '@/app/components/region'
 import {theme} from '@/app/styles'
+import {IWidgetAirQualityCredentials, IWidgetAirQualitySettings} from '@/app/widgets/air-quality'
 import {IWidgetCalendarCredentials, IWidgetCalendarSettings} from '@/app/widgets/calendar'
 import {IWidgetClockSettings} from '@/app/widgets/clock'
 import {IWidgetCryptoCredentials, IWidgetCryptoSettings} from '@/app/widgets/crypto'
@@ -21,6 +22,9 @@ type TWidgetCommons<S, C = never> = TWidgetInterface<S, C> & {
   region: [TWidgetRegionX, TWidgetRegionY]
 }
 
+interface IWidgetAirQuality extends TWidgetCommons<IWidgetAirQualitySettings, IWidgetAirQualityCredentials> {
+  name: 'air-quality'
+}
 interface IWidgetCalendar extends TWidgetCommons<IWidgetCalendarSettings, IWidgetCalendarCredentials> {
   name: 'calendar'
 }
@@ -40,7 +44,14 @@ interface IWidgetRssFeed extends TWidgetCommons<IWidgetRssFeedSettings> {
   name: 'rss-feed'
 }
 
-export type TWidget = IWidgetCalendar | IWidgetClock | IWidgetCrypto | IWidgetCurrency | IWidgetForecast | IWidgetRssFeed
+export type TWidget =
+  | IWidgetAirQuality
+  | IWidgetCalendar
+  | IWidgetClock
+  | IWidgetCrypto
+  | IWidgetCurrency
+  | IWidgetForecast
+  | IWidgetRssFeed
 export type TFontFamily = keyof typeof theme.font.family
 
 export interface ISettings {

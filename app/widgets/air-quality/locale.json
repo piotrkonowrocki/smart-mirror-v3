@@ -1,0 +1,24 @@
+{
+  "en": {
+    "air-quality": "Air quality",
+    "rating": {
+      "1": "Good",
+      "2": "Moderate",
+      "3": "Unhealthy for sensitive groups",
+      "4": "Unhealthy",
+      "5": "Very unhealthy",
+      "6": "Hazardous"
+    }
+  },
+  "pl": {
+    "air-quality": "Jakość powietrza",
+    "rating": {
+      "1": "Dobra",
+      "2": "Średnia",
+      "3": "Niezdrowa dla osób wrażliwych",
+      "4": "Niezdrowa",
+      "5": "Bardzo niezdrowa",
+      "6": "Zagrożenie dla życia"
+    }
+  }
+}

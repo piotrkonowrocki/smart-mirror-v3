@@ -4,6 +4,7 @@ import {TWidgetRegionX, TWidgetRegionY} from '@/app/components/region/types'
 import {useSettings} from '@/app/context'
 import {theme} from '@/app/styles'
 import {WidgetCalendar, WidgetClock, WidgetCrypto, WidgetCurrency, WidgetForecast, WidgetRssFeed} from '@/app/widgets'
+import {WidgetAirQuality} from '@/app/widgets/air-quality/widget'
 
 interface IRegionProps {
   position: [TWidgetRegionX, TWidgetRegionY]
@@ -29,6 +30,8 @@ export const Region: FC<IRegionProps> = ({position: [x, y]}) => {
         .filter(({region: [widgetX, widgetY]}) => widgetX === x && widgetY === y)
         .map((widget, i) => {
           switch (widget.name) {
+            case 'air-quality':
+              return <WidgetAirQuality key={i} {...widget} />
             case 'calendar':
               return <WidgetCalendar key={i} {...widget} />
             case 'clock':

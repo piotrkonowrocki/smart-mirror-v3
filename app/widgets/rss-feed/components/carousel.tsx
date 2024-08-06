@@ -10,7 +10,7 @@ interface ICarouselProps {
 
 const counterFps = 60
 const counterAnimationTime = 500
-const counterStepDisplayTime = 8000
+const counterStepDisplayTime = 15000
 const counterBaseFrequency = 1000 / counterFps
 
 export const Carousel: FC<ICarouselProps> = ({items}) => {

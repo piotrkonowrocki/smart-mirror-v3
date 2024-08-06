@@ -134,9 +134,13 @@ export const WidgetForecast: FC<TWidgetInterface<IWidgetForecastSettings, IWidge
                     const Icon = getAlertIcon(event)
 
                     return (
-                      <li key={i}>
-                        <Icon size={theme.icon.size.sub} css={{...theme.icon.composition.sub}} /> {t(`alerts.${event.replace(/ /gu, '-')}`)}
-                      </li>
+                      <Fragment key={i}>
+                        {i > 0 && <li css={{color: theme.color.faded}}>•</li>}
+                        <li>
+                          <Icon size={theme.icon.size.sub} css={{...theme.icon.composition.sub}} />{' '}
+                          {t(`alerts.${event.replace(/ /gu, '-')}`)}
+                        </li>
+                      </Fragment>
                     )
                   })}
                 </ul>

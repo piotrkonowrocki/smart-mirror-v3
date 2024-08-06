@@ -7,7 +7,17 @@ export default async function handler({method, query: {url}}: NextApiRequest, re
   switch (method) {
     case 'GET': {
       if (typeof url === 'string') {
-        const data = await parser.parseURL(Array.isArray(url) ? url[0] : url)
+        const buffer = await (await fetch(url)).arrayBuffer()
+        const text = await (await fetch(url)).text()
+
+        const encoding = text
+          .toLowerCase()
+          .substring(0, text.lastIndexOf('?>'))
+          .substring(text.indexOf('encoding=') + 'encoding='.length)
+          .replace(/"|'/gu, '')
+
+        const decoded = new TextDecoder(encoding).decode(buffer)
+        const data = await parser.parseString(decoded)
 
         return res.status(200).json(data)
       } else return res.status(500)

@@ -1,8 +1,5 @@
-import {FC, Fragment, useEffect, useState} from 'react'
-import {snakeCase} from 'change-case/keys'
+import {FC, Fragment} from 'react'
 import dayjs from 'dayjs'
-import {usePathname} from 'next/navigation'
-import {useRouter} from 'next/router'
 
 import {Widget} from '@/app/components/widget'
 import {useSettings} from '@/app/context'
@@ -10,13 +7,13 @@ import {useLocale} from '@/app/hooks'
 import {theme} from '@/app/styles'
 import {TWidgetInterface} from '@/app/types/settings'
 import {removeOrphans} from '@/app/utils'
-import axios from '@/app/utils/axios'
 import {
-  IGoogleOAuth2Response,
   IWidgetCalendarCredentials,
+  IWidgetCalendarPreResponse,
   IWidgetCalendarRanges,
   IWidgetCalendarResponse,
   IWidgetCalendarSettings,
+  useRefreshToken,
   WidgetCalendarRange,
 } from '@/app/widgets/calendar'
 
@@ -29,58 +26,36 @@ export const WidgetCalendar: FC<TWidgetInterface<IWidgetCalendarSettings, IWidge
   const {lang} = useSettings()
   const {t} = useLocale(locale, lang)
 
-  const [authToken, setAuthToken] = useState<string>()
-  const {push, replace} = useRouter()
-  const pathname = usePathname()
-
-  useEffect(() => {
-    const localAuthToken = localStorage.getItem('auth-token')
-    const code = new URLSearchParams(document.location.search).get('code')
-
-    if (localAuthToken) setAuthToken(localAuthToken)
-    else if (code) {
-      axios
-        .post<IGoogleOAuth2Response>(
-          'https://accounts.google.com/o/oauth2/token',
-          snakeCase({
-            grantType: 'authorization_code',
-            code,
-            clientId,
-            clientSecret,
-            redirectUri: document.location.origin,
-          }),
-        )
-        .then(({data: {accessToken}}) => {
-          if (pathname) replace(pathname)
-          localStorage.setItem('auth-token', accessToken)
-          setAuthToken(accessToken)
-        })
-    } else
-      push(
-        `https://accounts.google.com/o/oauth2/auth?scope=https://www.googleapis.com/auth/calendar.readonly&response_type=code&access_type=offline&redirect_uri=${document.location.origin}&client_id=${clientId}`,
-      )
-  }, [])
+  const refreshToken = useRefreshToken(clientId)
 
   return (
-    <Widget<IWidgetCalendarResponse>
+    <Widget<IWidgetCalendarResponse, IWidgetCalendarPreResponse>
       name="calendar"
-      forceLoader={!authToken}
-      queryKey={[...calendars.map(({id}) => id), ...(authToken ? [authToken] : [])]}
-      request={
-        authToken
-          ? calendars.map(({id}) => ({
-              url: `https://www.googleapis.com/calendar/v3/calendars/${id}/events`,
-              params: {
-                singleEvents: 'true',
-                timeMin: dayjs().startOf('day').toISOString(),
-                timeMax: dayjs().endOf('day').add(6, 'day').toISOString(),
-              },
-              headers: {
-                Authorization: `Bearer ${authToken}`,
-              },
-            }))
-          : []
+      queryKey={[...calendars.map(({id}) => id)]}
+      preRequest={{
+        url: 'https://accounts.google.com/o/oauth2/token',
+        method: 'post',
+        params: {
+          grantType: 'refresh_token',
+          clientId,
+          clientSecret,
+          refreshToken: `${refreshToken}`,
+        },
+      }}
+      request={({accessToken}) =>
+        calendars.map(({id}) => ({
+          url: `https://www.googleapis.com/calendar/v3/calendars/${id}/events`,
+          params: {
+            singleEvents: 'true',
+            timeMin: dayjs().startOf('day').toISOString(),
+            timeMax: dayjs().endOf('day').add(6, 'day').toISOString(),
+          },
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }))
       }
+      enabled={Boolean(refreshToken)}
     >
       {(instances) => {
         const ranges = instances

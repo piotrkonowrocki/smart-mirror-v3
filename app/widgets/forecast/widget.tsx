@@ -293,7 +293,7 @@ export const WidgetForecast: FC<TWidgetInterface<IWidgetForecastSettings, IWidge
                     <span css={{textAlign: 'left'}}>{getFormattedTemperature(day, units)}</span>
                     <span css={{color: theme.color.faded, textAlign: 'left'}}>{getFormattedTemperature(night, units)}</span>
                     <span css={{color: theme.color.faded, textAlign: 'left'}}>
-                      <IconWind size={theme.icon.size.sub} css={{...theme.icon.composition.sub}} />
+                      <IconWind size={theme.icon.size.sub} css={{...theme.icon.composition.sub}} />{' '}
                       {getFormattedWindSpeed(_windSpeed, units)}
                     </span>
                   </Fragment>

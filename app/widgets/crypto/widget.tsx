@@ -4,6 +4,7 @@ import {IconArrowDownRight, IconArrowUpRight} from '@tabler/icons-react'
 import Image from 'next/image'
 
 import {Widget} from '@/app/components/widget'
+import {useSettings} from '@/app/context'
 import {theme} from '@/app/styles'
 import {TWidgetInterface} from '@/app/types/settings'
 import {rgba} from '@/app/utils'
@@ -13,6 +14,8 @@ export const WidgetCrypto: FC<TWidgetInterface<IWidgetCryptoSettings, IWidgetCry
   credentials: {apiKey},
   settings: {baseCurrency, tokenIds},
 }) => {
+  const {scale} = useSettings()
+
   return (
     <Widget<IWidgetCryptoResponse>
       name="crypto"
@@ -28,9 +31,9 @@ export const WidgetCrypto: FC<TWidgetInterface<IWidgetCryptoSettings, IWidgetCry
           headers: {
             'x-cg-demo-api-key': apiKey,
           },
+          transformToSnakeCase: true,
         },
       ]}
-      transformToSnakeCase
     >
       {([tokens]) => {
         return (
@@ -60,7 +63,7 @@ export const WidgetCrypto: FC<TWidgetInterface<IWidgetCryptoSettings, IWidgetCry
                       },
                     }}
                   >
-                    <Image src={image.replace('large', 'thumb')} alt={symbol} fill priority css={{objectFit: 'cover'}} />
+                    <Image src={image} alt={symbol} fill priority css={{objectFit: 'cover'}} sizes={`${18 * scale}px`} />
                   </div>
                   {symbol.toUpperCase()}: {currentPrice}
                   {baseCurrency.toUpperCase()}{' '}

@@ -16,22 +16,22 @@ interface IRequest {
   params?: {
     [key: string]: string | number
   }
-  refresh?: number
+  transformToSnakeCase?: boolean
   url: string
 }
 
-interface IWidgetProps<T> {
+interface IWidgetProps<ResponseType, PreResponseType = unknown> {
   callback?(): unknown
-  children(params: T): ReactNode
-  forceLoader?: boolean
+  children(params: ResponseType): ReactNode
+  enabled?: boolean
   name: TWidget['name']
+  preRequest?: IRequest
   queryKey: (string | number)[]
   refresh?: number
-  request?: IRequest[]
-  transformToSnakeCase?: boolean
+  request?: IRequest[] | ((response: PreResponseType) => IRequest[])
 }
 
-const getRequestData = async ({headers = {}, method = 'get', params = {}, url}: IRequest, transformToSnakeCase: boolean = false) => {
+const getRequestData = async ({headers = {}, method = 'get', params = {}, transformToSnakeCase = false, url}: IRequest) => {
   const casedParams = transformToSnakeCase ? snakeCase(params) : params
 
   switch (method) {
@@ -55,16 +55,16 @@ const getRequestData = async ({headers = {}, method = 'get', params = {}, url}: 
   }
 }
 
-export const Widget = <T extends unknown[]>({
+export const Widget = <ResponseType extends unknown[], PreResponseType = unknown>({
   callback,
   children,
-  forceLoader,
+  enabled = true,
   name,
+  preRequest,
   queryKey,
   refresh = 1000 * 60 * 30,
   request = [],
-  transformToSnakeCase = false,
-}: IWidgetProps<T>) => {
+}: IWidgetProps<ResponseType, PreResponseType>) => {
   const toastId = useRef<Id>()
   const [state, setState] = useState<TWidgetState>('loading')
 
@@ -72,16 +72,19 @@ export const Widget = <T extends unknown[]>({
     refetchInterval: refresh,
     queryKey: ['widget', name, ...queryKey],
     queryFn: async () => {
+      const preResponse = preRequest ? await getRequestData(preRequest) : undefined
+
       const response = await Promise.all(
-        request.map(async (params) => {
-          const partial = await getRequestData(params, transformToSnakeCase)
+        (Array.isArray(request) ? request : request(preResponse)).map(async (params) => {
+          const partial = await getRequestData(params)
 
           return partial
         }),
       )
 
-      return [...response, ...(callback ? [callback()] : [])] as T
+      return [...response, ...(callback ? [callback()] : [])] as ResponseType
     },
+    enabled,
     retry: 0,
   })
 
@@ -126,7 +129,7 @@ export const Widget = <T extends unknown[]>({
         transition: 'opacity 200ms',
       }}
     >
-      {(forceLoader || state !== 'rendered') && !isError && (
+      {(!enabled || state !== 'rendered') && !isError && (
         <IconLoader2
           size="48rem"
           strokeWidth="2.5rem"
@@ -141,7 +144,7 @@ export const Widget = <T extends unknown[]>({
         />
       )}
 
-      {isError ? <IconAlertTriangle /> : <>{!forceLoader && state === 'rendered' && data && children(data)}</>}
+      {isError ? <IconAlertTriangle /> : <>{enabled && state === 'rendered' && data && children(data)}</>}
     </div>
   )
 }

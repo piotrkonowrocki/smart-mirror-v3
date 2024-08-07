@@ -63,6 +63,13 @@ export interface IWidgetCalendarEvent {
   }
 }
 
+export interface IWidgetCalendarPreResponse {
+  accessToken: string
+  expiresIn: number
+  scope: string
+  tokenType: string
+}
+
 export type IWidgetCalendarResponse = {
   accessRole: string
   defaultReminders: unknown[]

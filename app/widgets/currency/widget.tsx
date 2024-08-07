@@ -26,9 +26,9 @@ export const WidgetCurrency: FC<TWidgetInterface<IWidgetCurrencySettings, IWidge
             startDate: dayjs().subtract(2, 'days').format('YYYY-MM-DD'),
             symbols: currencies.join(','),
           },
+          transformToSnakeCase: true,
         },
       ]}
-      transformToSnakeCase
     >
       {([{response}]) => {
         const [previous, current] = Object.values(response).slice(-2)
